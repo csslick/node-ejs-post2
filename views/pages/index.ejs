@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <nav>
+      <a href="/">home</a> |
+      <a href="/about">about</a>
+    </nav>
+    <h1>게시판</h1>
+    <form action="/create" method="post" class="mb-4">
+      <div class="mb-3">
+        <input type="text" name="name" placeholder="작성자명" class="form-control">
+      </div>
+      <div class="mb-3">
+        <textarea name="post" placeholder="글을 입력해주세요" class="form-control"></textarea>
+      </div>
+        <button type="submit" class="btn btn-primary">글쓰기</button>
+    </form>
+    <h2>글 목록</h2>
+    <!-- 글의 개수만큼 출력(최신글 순) -->
+    <ul class="post-list">
+    <% for(let i = posts.length-1; i >= 0; i--) { %>
+      <li class="border-bottom py-4 d-flex justify-content-between align-items-start">
+        <div class="col me-3">
+          <span>Post No: <%= i %> </span>
+          <small class="fw-bold">작성자: <%= posts[i].name %> </small>
+          <p class="fw-light m-0"><%= posts[i].post %></p> 
+        </div>
+        <form action="/delete/<%= i %>" method="post">
+          <button class="btn btn-danger">삭제</button>
+        </form>
+      </li>
+    <% } %>
+    </ul>
+  </div><!-- container -->
+ 
+</body>
+</html>
